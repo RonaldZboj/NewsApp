@@ -83,15 +83,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        // Get a reference to the ConnectivityManager to check state of network connectivity
-        ConnectivityManager connMgr = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        // Get details of network
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         // If there is a network connection, fetch data
-        if (networkInfo != null && networkInfo.isConnected()) {
+        if (isConnected()) {
             // Get a reference to the LoaderManager
             LoaderManager loaderManager = getLoaderManager();
 
@@ -108,6 +102,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
+
+        // Checking internet connection
+        if (!isConnected()) {
+            // If not, hide loading indicator and update emptyView with no connection massage
+            View loadingIndicator = findViewById(R.id.progress_bar);
+            loadingIndicator.setVisibility(View.GONE);
+            mEmptyTextView.setText(R.string.no_internet);
+        }
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String search = sharedPrefs.getString(
@@ -129,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         return new NewsLoader(this, uriBuilder.toString());
     }
+
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> news) {
         // Hide loading indicator - the data has been loaded
@@ -168,6 +171,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //Helper method to check internet connection
+    public boolean isConnected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 
 }
