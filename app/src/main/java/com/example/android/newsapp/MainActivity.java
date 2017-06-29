@@ -141,6 +141,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // Set empty state text to display "No News found."
         mEmptyTextView.setText(R.string.no_data_available);
 
+        // Checking internet connection, if not, update the emptyView with no internet massage
+        if (!isConnected()) {
+            mEmptyTextView.setText(R.string.no_internet);
+        }
+
         // Clear the adapter
         mAdapter.clear();
 
