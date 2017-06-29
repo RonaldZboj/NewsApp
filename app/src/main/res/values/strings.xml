@@ -1,0 +1,36 @@
+<resources>
+
+    <!-- App name -->
+    <string name="app_name">News App</string>
+
+    <!-- String comes out when no data to display -->
+    <string name="no_data_available">No news found.</string>
+
+    <!-- String when is no internet connection -->
+    <string name="no_internet">No Internet connection</string>
+
+    <!-- Settings Menu Item -->
+    <string name="settings_menu_item">Settings</string>
+
+    <!-- Settings Activity Title -->
+    <string name="settings_title">News Settings</string>
+
+    <!-- Strings For Search Preference -->
+    <string name="settings_search_label">Search: </string>
+    <string name="settings_search_key" translatable="false">q</string>
+    <string name="settings_search_default" translatable="false">Poland</string>
+
+    <!-- Strings For Order-By Preference -->
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_key" translatable="false">order_by</string>
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_newest_value</string>
+
+    <!-- Label for order-by Search option  -->
+    <string name="settings_order_by_newest_label">Newest</string>
+    <string name="settings_order_by_newest_value" translatable="false">newest</string>
+
+    <!-- Label for order-by oldest option -->
+    <string name="settings_order_by_oldest_label">Oldest</string>
+    <string name="settings_order_by_oldest_value" translatable="false">oldest</string>
+
+</resources>
